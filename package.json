@@ -1,0 +1,22 @@
+{
+  "name": "basiconode",
+  "version": "1.0.0",
+  "description": "curso basico node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/AngelLopez15/ServidorBasicoNode.git"
+  },
+  "author": "angel-lopez",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AngelLopez15/ServidorBasicoNode/issues"
+  },
+  "homepage": "https://github.com/AngelLopez15/ServidorBasicoNode",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
