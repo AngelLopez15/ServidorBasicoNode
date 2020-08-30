@@ -7,38 +7,23 @@ const app = express();
 // asignando un puerto al servidor (solo para desarrollo local)
 const port = 3000;
 
-// Motor de plantillas
-// Aqui debemos poner en el segundo parametro el lunguaje que ocuparemos para hacer
-// las platillas
-app.set('view engine', 'ejs');
-// Debemos indicar la ruta donde estan las vistas
-app.set('views',__dirname+'/views');
-
-// si pones rutas estaticas antes de los verbos (POST, GET...)
-// estas se van a ejecutar antes y se les conoce como middleware
-// _dirname sirve para poner todo la ruta por default y solo le cantatenamos el archivo
-// al que debe de acceder
-app.use(express.static(__dirname+'/public'));
-
 // declarando lo que debe hacer el servidor cuando le hacen una peticion GET
 // recibe dos parametros el primero es la ruta
 // el segundo es un callback con el requerimiento y la respuesta como parametros
 // esta callback contiene toda la logica de lo que debe hacer el servidor cuando le hacen
 // una peticion GET
-// Cuando trabajamos con plantillas debemo ocupar render en lugar de send
 app.get('/', (req, res) =>{
-  res.render('index',{titulo:'mi titulo dinámico'});
+  res.send('Mi respuesta desde Express');
 })
 
 // podemos poner otra peticion get para otra ruta
 app.get('/servicios', (req, res) =>{
-  res.render('servicios', {tituloServicios:'Este es un mensaje dinamico de servicios'});
+  res.send('Mi respuesta desde Servicios');
 })
 
 // Si no encuentra ninguna ruta ejecutamos el error 404
 app.use((req,res,next)=>{
-  // Si no necesitamos mandar nada entonces esta es la forma corta
-  res.status(404).render('404')
+  res.status(404).sendFile(__dirname+'/public/error404.html')
 })
 
 // Levantando el servido
