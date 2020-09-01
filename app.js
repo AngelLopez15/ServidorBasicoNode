@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 
 // asignando un puerto al servidor (solo para desarrollo local)
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 // Motor de plantillas
 // Aqui debemos poner en el segundo parametro el lunguaje que ocuparemos para hacer
