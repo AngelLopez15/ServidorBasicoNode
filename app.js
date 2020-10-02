@@ -26,14 +26,12 @@ app.use(express.static(__dirname+'/public'));
 // esta callback contiene toda la logica de lo que debe hacer el servidor cuando le hacen
 // una peticion GET
 // Cuando trabajamos con plantillas debemo ocupar render en lugar de send
-app.get('/', (req, res) =>{
-  res.render('index',{titulo:'mi titulo dinámico'});
-})
 
-// podemos poner otra peticion get para otra ruta
-app.get('/servicios', (req, res) =>{
-  res.render('servicios', {tituloServicios:'Este es un mensaje dinamico de servicios'});
-})
+// importando las rutas desde el router
+app.use('/', require('./router/rutasWeb'));
+
+app.use('/mascotas', require('./router/mascotas'));
+
 
 // Si no encuentra ninguna ruta ejecutamos el error 404
 // Cuando veamos un use significa que estamos usando un middleware
