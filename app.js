@@ -8,7 +8,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // Motor de plantillas
-// Aqui debemos poner en el segundo parametro el lunguaje que ocuparemos para hacer
+// Aqui debemos poner en el segundo parametro el lenguaje que ocuparemos para hacer
 // las platillas
 app.set('view engine', 'ejs');
 // Debemos indicar la ruta donde estan las vistas
@@ -36,6 +36,7 @@ app.get('/servicios', (req, res) =>{
 })
 
 // Si no encuentra ninguna ruta ejecutamos el error 404
+// Cuando veamos un use significa que estamos usando un middleware
 app.use((req,res,next)=>{
   // Si no necesitamos mandar nada entonces esta es la forma corta
   res.status(404).render('404')
