@@ -4,8 +4,25 @@ const express = require('express');
 // asignando express a la constante app
 const app = express();
 
+// importando dotenv para hacer las variables de entorno
+require('dotenv').config();
+// importante: tambien debemos crear el archivo .env que en donde se configuran las variables 
+
 // asignando un puerto al servidor (solo para desarrollo local)
 const port = process.env.PORT || 3000;
+
+// Para hacer la conexión a la base de datos
+const mongoose = require('mongoose');
+
+// Datos necesarios para hacer la conexion en el archivo .env
+
+const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.ybufp.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+
+// haciendo la conexión a la BD
+mongoose.connect(uri, {useNewUrlParser:true, useUnifiedTopology:true})
+  .then(()=>console.log('Base de Datos conectada'))
+  .catch(e=>console.log(e))
+
 
 // Motor de plantillas
 // Aqui debemos poner en el segundo parametro el lenguaje que ocuparemos para hacer
