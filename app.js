@@ -16,7 +16,7 @@ const mongoose = require('mongoose');
 
 // Datos necesarios para hacer la conexion en el archivo .env
 
-const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.ybufp.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
+const uri = `mongodb+srv://${process.env.USER2}:${process.env.PASSWORD2}@cluster0.ybufp.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`;
 
 // haciendo la conexión a la BD
 mongoose.connect(uri, {useNewUrlParser:true, useUnifiedTopology:true})
