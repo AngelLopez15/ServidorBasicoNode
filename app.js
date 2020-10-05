@@ -1,8 +1,17 @@
 // importando express
 const express = require('express');
 
+// Importando body-parser para poder hacer el CRUD de la DB
+const bodyParser = require('body-parser');
+
 // asignando express a la constante app
 const app = express();
+
+// Configuracion del body parser
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
 
 // importando dotenv para hacer las variables de entorno
 require('dotenv').config();
