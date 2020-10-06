@@ -10,6 +10,7 @@
       <a href="/mascotas" class="btn btn-dark btn-block">Volver a mascotas</a>
     <% } %>
 
+
     <table class="table">
       <thead class="thead-dark">
         <tr>
@@ -37,6 +38,35 @@
         </tr>    
       </tbody>
     </table>
+
+
+    <!-- para enviar un formulario de edicion debemos ocupar un id -->
+    <form id="formularioEditar" data-id="<%= mascota.id %>">
+
+      <input 
+        type="text"
+        class="form-control my-2"
+        name="nombre"
+        value="<%= mascota.nombre %>"
+        id="nombreInput"
+      >
+
+      <input 
+        type="text"
+        class="form-control my-2"
+        name="descripcion"
+        value="<%= mascota.descripcion %>"
+        id="descripcionInput"
+      >
+
+      <button
+        class="btn btn-warning btn-block"
+        type="submit"
+      >
+        Editar
+      </button>
+    
+    </form>
 
   </div>
   
@@ -76,5 +106,48 @@
       
     }
   });
+
+  const formularioEditar = document.querySelector('#formularioEditar')
+
+  formularioEditar.addEventListener('submit', async(e) => {
+
+    e.preventDefault()
+
+    // para acceder a los datos hay dos opciones
+    // Opcion 1
+    const nombre = formularioEditar.elements['nombre'].value
+    // Opcion 2 (recomendada)
+    const descripcion = document.querySelector('#descripcionInput').value
+
+    // obteniendo el id para poder consultar la DB
+    const id = formularioEditar.dataset.id
+
+    // haciendo la solicitud a las base de datos
+    try {
+
+      // Enviando los cambios a la DB
+      const data = await fetch(`/mascotas/${id}`, {
+        method:'put',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({nombre, descripcion})
+      })
+
+      // obteniendo la respuesta
+      const res = await data.json()
+
+      // Regresando el usuario a la vista de mastacas dependiendo del estado de la respues
+      if (res.estado) {
+        window.location.href = '/mascotas'
+      } else {
+        console.log(res)
+      }
+
+    } catch (error) {
+      console.log(error)
+    }
+    
+  })
 
 </script>

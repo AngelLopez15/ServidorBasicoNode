@@ -117,5 +117,33 @@ router.delete('/:id', async(req, res)=>{
 
 })
 
+// Creando el verbo PUT del CRUD para editar un registro
+router.put('/:id', async(req, res)=>{
+
+  // obteniendo el id para hacer la consulta a la base de datos 
+  const id = req.params.id
+  // mandando los datos capturados por el formulario atraves del body
+  const body = req.body
+
+  try {
+    
+    const mascotaDB = await Mascota.findByIdAndUpdate(id, body, {useFindAndModify:false})
+
+    // Enviando la respuesta en caso de que se haya editado con exito
+    res.json({
+      estado:true,
+      mensaje:'Mascota editada'
+    })
+
+  } catch (error) {
+    console.log(error)
+    res.json({
+      estado:false,
+      mensaje:'Fallo la edición'
+    })
+
+  }
+
+})
 
 module.exports = router;
