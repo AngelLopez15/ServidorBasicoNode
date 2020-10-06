@@ -1,0 +1,34 @@
+<%- include('templates/cabecera', {tituloWeb:'Editar Mascota'}); %>
+  
+  <div class="container">
+    <h1>Editar Datos de Mascota</h1>
+
+    <% if (error) { %>
+      <p>
+        <%= mensaje %> 
+      </p>
+      <a href="/mascotas" class="btn btn-dark btn-block">Volver a mascotas</a>
+    <% } %>
+
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row"><%= mascota.id %></th>
+          <td><%= mascota.nombre %></td>
+          <td><%= mascota.descripcion %></td>
+          <td> Acciones </td>
+        </tr>    
+      </tbody>
+    </table>
+
+  </div>
+  
+<%- include('templates/footer'); %>
