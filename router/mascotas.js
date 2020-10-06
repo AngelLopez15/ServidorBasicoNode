@@ -48,7 +48,7 @@ router.post('/', async(req,res)=>{
     console.log(error)
   }
 
-})
+});
 
 
 // ocupamos async y await por que se estan haciendo solicitudes a las DB
@@ -81,6 +81,38 @@ router.get('/:id', async (req, res) => {
       error:true,
       mensaje: 'No se encontro el id seleccionado'
     })
+  }
+
+});
+
+// Creando el verbo Delete del CRUD
+// necesitamos el id para poder obtener el registro a borrar
+router.delete('/:id', async(req, res)=>{
+  
+  // guardando el id para buscar el registro que se va a borrar
+  const id = req.params.id
+
+  try {
+    
+    const mascotaDB = await Mascota.findByIdAndDelete({_id:id});
+
+    if (mascotaDB) {
+      // como no podemos renderizar directamente a mascotas de nuevo ya que esto da un error
+      // entonces la respuesta va a ser un JSON
+      res.json({
+        estado:true,
+        mensaje: 'Eliminado'
+      })
+      
+    } else {
+      res.json({
+        estado:false,
+        mensaje:'No se pudo eliminar'
+      })
+    }
+
+  } catch (error) {
+    console.log(error)
   }
 
 })
